@@ -1,0 +1,6 @@
+{
+  "name": "Grange Construction and Steel",
+  "description": "Professional contractor website for Grange Construction and Steel (Pty) Ltd in Riverton, Cape Town, covering building construction, steel fabrication, finishing, and property maintenance.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
