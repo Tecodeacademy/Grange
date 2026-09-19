@@ -7,20 +7,25 @@ import {
   ShieldCheck, 
   CheckCircle2, 
   MessageSquare,
-  Check,
-  ExternalLink
+  Mail,
+  Check
 } from 'lucide-react';
 import { projectShowcase } from '../../data/constructionData';
 import { ProjectItem } from '../../types';
+import grangeLogo from '../../assets/images/grange_logo_1789776582651.jpg';
+import buildingConstructionImg from '../../assets/images/building_construction_service_1789782205737.jpg';
+import steelFabricationImg from '../../assets/images/steel_fabrication_service_1789782218564.jpg';
+import finishingWorkImg from '../../assets/images/finishing_work_service_1789782230813.jpg';
+import propertyMaintenanceImg from '../../assets/images/property_maintenance_service_1789782244116.jpg';
+import directorAndileImg from '../../assets/images/director_andile_mntambo_1789783854811.jpg';
+import { SuppliersSection } from './SuppliersSection';
 
 interface ReferenceSiteProps {
   onSelectProject: (project: ProjectItem) => void;
-  onOpenPromptModal: () => void;
 }
 
 export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
-  onSelectProject,
-  onOpenPromptModal
+  onSelectProject
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [rfpSubmitted, setRfpSubmitted] = useState<boolean>(false);
@@ -66,7 +71,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
             </h1>
 
             <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
-              From turnkey house construction, room extensions, and boundary walls to automated security gates, carports, and complete property maintenance. Supervised on-site by Managing Director Andile Mntambo.
+              From turnkey house construction, room extensions, and boundary walls to automated security gates, carports, and complete property maintenance. Supervised on-site by Managing Director Andile.
             </p>
 
             {/* Call to Actions */}
@@ -80,21 +85,21 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
               </a>
 
               <a
-                href="https://wa.me/27724508820?text=Hello%20Grange%20Construction%20and%20Steel,%20I%20would%20like%20a%20quote"
+                href="https://wa.me/27710826359?text=Hello%20Grange%20Construction%20and%20Steel,%20I%20would%20like%20a%20quote"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3.5 rounded-xl text-sm font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition-all shadow-sm flex items-center gap-2"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>WhatsApp: 072 450 8820</span>
+                <span>WhatsApp: +27 71 082 6359</span>
               </a>
 
               <a
-                href="tel:0724508820"
+                href="tel:+27740559954"
                 className="px-5 py-3.5 rounded-xl text-sm font-semibold bg-slate-800/80 hover:bg-slate-700 text-white border border-slate-700 transition-all flex items-center gap-2"
               >
                 <Phone className="w-4 h-4 text-amber-400" />
-                <span>Call Direct</span>
+                <span>Call: +27 74 055 9954</span>
               </a>
             </div>
 
@@ -110,7 +115,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
               </div>
               <div className="space-y-0.5">
                 <span className="text-amber-400 font-bold block text-sm">Direct Supervision</span>
-                <span className="text-slate-400">Led by Andile Mntambo</span>
+                <span className="text-slate-400">Led by Andile</span>
               </div>
               <div className="space-y-0.5">
                 <span className="text-amber-400 font-bold block text-sm">Western Cape Wide</span>
@@ -141,11 +146,12 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
             {/* Division 1: Building Construction */}
             <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between">
               <div>
-                <div className="h-52 w-full overflow-hidden bg-slate-100 relative">
+                <div className="h-56 w-full overflow-hidden bg-slate-100 relative">
                   <img 
-                    src="https://images.unsplash.com/photo-1541888946425-d0fbb18615f8?auto=format&fit=crop&w=1000&q=80" 
-                    alt="Building Construction Cape Town" 
+                    src={buildingConstructionImg} 
+                    alt="Building Construction Architectural Plans Cape Town" 
                     className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
                   />
                   <div className="absolute top-4 left-4 bg-slate-900/90 text-amber-400 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
                     Division 01
@@ -192,7 +198,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
 
               <div className="p-6 pt-0 flex items-center justify-between border-t border-slate-100 mt-4 pt-4">
                 <a
-                  href="https://wa.me/27724508820?text=Hello%20Grange%20Construction,%20I%20need%20a%20quote%20for%20Building%20Construction"
+                  href="https://wa.me/27710826359?text=Hello%20Grange%20Construction,%20I%20need%20a%20quote%20for%20Building%20Construction"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs font-semibold text-emerald-700 hover:text-emerald-800 flex items-center gap-1.5"
@@ -213,11 +219,12 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
             {/* Division 2: Steel Fabrication */}
             <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between">
               <div>
-                <div className="h-52 w-full overflow-hidden bg-slate-100 relative">
+                <div className="h-56 w-full overflow-hidden bg-slate-100 relative">
                   <img 
-                    src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80" 
-                    alt="Steel Fabrication Workshop Cape Town" 
+                    src={steelFabricationImg} 
+                    alt="Steel Fabrication Structural Steel Erection Cape Town" 
                     className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
                   />
                   <div className="absolute top-4 left-4 bg-slate-900/90 text-amber-400 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
                     Division 02
@@ -264,7 +271,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
 
               <div className="p-6 pt-0 flex items-center justify-between border-t border-slate-100 mt-4 pt-4">
                 <a
-                  href="https://wa.me/27724508820?text=Hello%20Grange%20Construction,%20I%20need%20a%20quote%20for%20Steel%20Fabrication"
+                  href="https://wa.me/27710826359?text=Hello%20Grange%20Construction,%20I%20need%20a%20quote%20for%20Steel%20Fabrication"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs font-semibold text-emerald-700 hover:text-emerald-800 flex items-center gap-1.5"
@@ -285,11 +292,12 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
             {/* Division 3: Finishing Work */}
             <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between">
               <div>
-                <div className="h-52 w-full overflow-hidden bg-slate-100 relative">
+                <div className="h-56 w-full overflow-hidden bg-slate-100 relative">
                   <img 
-                    src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1000&q=80" 
-                    alt="Finishing Work Tiling Painting Cape Town" 
+                    src={finishingWorkImg} 
+                    alt="Finishing Work Decorative Tray Ceilings & Lighting Cape Town" 
                     className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
                   />
                   <div className="absolute top-4 left-4 bg-slate-900/90 text-amber-400 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
                     Division 03
@@ -301,7 +309,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
                     Finishing Work
                   </h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    Flawless interior and exterior craftsmanship. Crisp laser-leveled porcelain tiling, smooth Rhinolite skim plastering, ceilings, paving, and 100% leak-proof waterproofing.
+                    Flawless interior and exterior craftsmanship. Crisp laser-leveled porcelain tiling, smooth Rhinolite skim plastering, decorative tray ceilings, paving, and 100% leak-proof waterproofing.
                   </p>
 
                   <div className="space-y-2 pt-2 border-t border-slate-100">
@@ -323,7 +331,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
                       </li>
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                        <span><strong>Ceilings</strong> – Suspended drop-ceilings, flush plaster & cornices</span>
+                        <span><strong>Ceilings</strong> – Suspended drop-ceilings, decorative cove lighting & cornices</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
@@ -336,7 +344,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
 
               <div className="p-6 pt-0 flex items-center justify-between border-t border-slate-100 mt-4 pt-4">
                 <a
-                  href="https://wa.me/27724508820?text=Hello%20Grange%20Construction,%20I%20need%20a%20quote%20for%20Finishing%20Work"
+                  href="https://wa.me/27710826359?text=Hello%20Grange%20Construction,%20I%20need%20a%20quote%20for%20Finishing%20Work"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs font-semibold text-emerald-700 hover:text-emerald-800 flex items-center gap-1.5"
@@ -357,11 +365,12 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
             {/* Division 4: Property Maintenance */}
             <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between">
               <div>
-                <div className="h-52 w-full overflow-hidden bg-slate-100 relative">
+                <div className="h-56 w-full overflow-hidden bg-slate-100 relative">
                   <img 
-                    src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1000&q=80" 
-                    alt="Property Maintenance Cape Town" 
+                    src={propertyMaintenanceImg} 
+                    alt="Property Maintenance Before and After Renovation Cape Town" 
                     className="w-full h-full object-cover"
+                    referrerPolicy="no-referrer"
                   />
                   <div className="absolute top-4 left-4 bg-slate-900/90 text-amber-400 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
                     Division 04
@@ -408,7 +417,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
 
               <div className="p-6 pt-0 flex items-center justify-between border-t border-slate-100 mt-4 pt-4">
                 <a
-                  href="https://wa.me/27724508820?text=Hello%20Grange%20Construction,%20I%20need%20a%20quote%20for%20Property%20Maintenance"
+                  href="https://wa.me/27710826359?text=Hello%20Grange%20Construction,%20I%20need%20a%20quote%20for%20Property%20Maintenance"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs font-semibold text-emerald-700 hover:text-emerald-800 flex items-center gap-1.5"
@@ -511,21 +520,22 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
         </div>
       </section>
 
-      {/* About Andile Mntambo & Grange Construction */}
+      {/* About Andile & Grange Construction */}
       <section id="about" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Image / Leadership card */}
             <div className="space-y-4">
-              <div className="relative rounded-3xl overflow-hidden shadow-lg border border-slate-200 aspect-4/3 bg-slate-100">
+              <div className="relative rounded-3xl overflow-hidden shadow-lg border border-slate-200 aspect-4/3 sm:aspect-square md:aspect-4/3 bg-slate-100 group">
                 <img
-                  src="https://images.unsplash.com/photo-1541888946425-d0fbb18615f8?auto=format&fit=crop&w=1200&q=80"
-                  alt="Andile Mntambo Grange Construction Riverton"
-                  className="w-full h-full object-cover"
+                  src={directorAndileImg}
+                  alt="Andile Managing Director and Founder Grange Construction and Steel (Pty) Ltd"
+                  className="w-full h-full object-cover object-top"
+                  referrerPolicy="no-referrer"
                 />
                 <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent text-white">
-                  <div className="font-bold text-lg sm:text-xl">Andile Mntambo</div>
-                  <div className="text-amber-400 text-xs font-semibold">Managing Director & Founder</div>
+                  <div className="font-bold text-lg sm:text-xl">Andile</div>
+                  <div className="text-amber-400 text-xs font-semibold tracking-wide">Managing Director & Founder</div>
                   <div className="text-xs text-slate-300 mt-1">Grange Construction and Steel (Pty) Ltd</div>
                 </div>
               </div>
@@ -558,7 +568,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
               </p>
 
               <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                <strong>Grange Construction and Steel (Pty) Ltd</strong> was established by Director Andile Mntambo to solve this problem. Because we have our own in-house steel fabrication workshop in Riverton alongside our certified masonry and finishes teams, your gates, carports, boundary walls, and house extensions are designed and built in complete harmony.
+                <strong>Grange Construction and Steel (Pty) Ltd</strong> was established by Director Andile to solve this problem. Because we have our own in-house steel fabrication workshop in Riverton alongside our certified masonry and finishes teams, your gates, carports, boundary walls, and house extensions are designed and built in complete harmony.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
@@ -568,7 +578,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
                     <span>On-Site Supervision</span>
                   </div>
                   <p className="text-xs text-slate-600">
-                    Direct hands-on supervision by Andile Mntambo on every active project.
+                    Direct hands-on supervision by Andile on every active project.
                   </p>
                 </div>
 
@@ -586,6 +596,9 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
           </div>
         </div>
       </section>
+
+      {/* Verified Hardware & Material Suppliers Showcase */}
+      <SuppliersSection />
 
       {/* Contact & Free Quote Form */}
       <section id="contact" className="py-20 bg-slate-900 text-white">
@@ -615,11 +628,21 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
                 </div>
 
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-slate-800/80 border border-slate-700">
+                  <Mail className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-white block font-semibold">Official Email Inquiries</strong>
+                    <a href="mailto:info@grangeconstructions.co.za" className="text-slate-300 hover:text-white text-xs block transition-colors">
+                      info@grangeconstructions.co.za
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 p-4 rounded-xl bg-slate-800/80 border border-slate-700">
                   <Phone className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong className="text-white block font-semibold">Direct Telephone Call</strong>
-                    <a href="tel:0724508820" className="text-slate-300 hover:text-white text-xs">
-                      +27 72 450 8820 (Director: Andile Mntambo)
+                    <a href="tel:+27740559954" className="text-slate-300 hover:text-white text-xs block">
+                      +27 74 055 9954
                     </a>
                   </div>
                 </div>
@@ -627,14 +650,14 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
                 <div className="flex items-start gap-3 p-4 rounded-xl bg-slate-800/80 border border-slate-700">
                   <MessageSquare className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
                   <div>
-                    <strong className="text-white block font-semibold">WhatsApp Instant Chat</strong>
+                    <strong className="text-white block font-semibold">WhatsApp Instant Quote</strong>
                     <a 
-                      href="https://wa.me/27724508820?text=Hello%20Grange%20Construction%20and%20Steel,%20I%20would%20like%20a%20quote" 
+                      href="https://wa.me/27710826359?text=Hello%20Grange%20Construction%20and%20Steel,%20I%20would%20like%20a%20quote" 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="text-emerald-400 hover:underline text-xs"
                     >
-                      +27 72 450 8820 (Send site photos & plan drawings)
+                      +27 71 082 6359 (Send site photos & plan drawings)
                     </a>
                   </div>
                 </div>
@@ -643,7 +666,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
                   <ShieldCheck className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong className="text-white block font-semibold">Service Coverage</strong>
-                    <span className="text-slate-300 text-xs">Serving the Greater Cape Town Metro & Western Cape</span>
+                    <span className="text-slate-300 text-xs">Serving Greater Cape Town Metro, Northern Suburbs, Southern Suburbs & Winelands</span>
                   </div>
                 </div>
               </div>
@@ -670,7 +693,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
                   <input
                     type="tel"
                     required
-                    placeholder="e.g. 072 450 8820"
+                    placeholder="e.g. 074 055 9954"
                     className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-amber-600 focus:bg-white transition-colors"
                   />
                 </div>
@@ -698,7 +721,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
 
               {rfpSubmitted ? (
                 <div className="p-3.5 rounded-xl bg-emerald-50 text-emerald-800 text-xs text-center font-medium border border-emerald-200">
-                  ✓ Inquiry sent successfully! Managing Director Andile Mntambo will contact you shortly.
+                  ✓ Inquiry sent successfully! Managing Director Andile will contact you shortly.
                 </div>
               ) : (
                 <button
@@ -718,34 +741,40 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-800 pb-6">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-amber-500 text-slate-950 font-bold flex items-center justify-center">
-                <Building2 className="w-4 h-4" />
+              <div className="w-10 h-10 rounded-lg overflow-hidden bg-slate-900 border border-slate-700/60 flex-shrink-0">
+                <img 
+                  src={grangeLogo} 
+                  alt="Grange Construction & Steel" 
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
               </div>
-              <span className="font-display font-bold text-white tracking-wider text-sm">
-                Grange Construction and Steel (Pty) Ltd
-              </span>
+              <div>
+                <span className="font-display font-bold text-white tracking-wider text-sm block">
+                  Grange Construction and Steel (Pty) Ltd
+                </span>
+                <span className="text-[11px] text-amber-500 font-medium">
+                  Building & Steel Specialists • Cape Town
+                </span>
+              </div>
             </div>
 
             <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400">
+              <a href="mailto:info@grangeconstructions.co.za" className="text-amber-400 hover:underline flex items-center gap-1.5">
+                <Mail className="w-3.5 h-3.5" />
+                <span>info@grangeconstructions.co.za</span>
+              </a>
+              <span>•</span>
               <span>29 Bayside St, Riverton, Cape Town</span>
               <span>•</span>
-              <span>Director: Andile Mntambo</span>
+              <span>Director: Andile</span>
               <span>•</span>
               <span>Western Cape</span>
             </div>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-            <p>© {new Date().getFullYear()} Grange Construction and Steel (Pty) Ltd.</p>
-            
-            {/* Discreet button for the prompt spec */}
-            <button
-              onClick={onOpenPromptModal}
-              className="text-amber-400 hover:underline text-xs flex items-center gap-1 font-medium"
-            >
-              <span>Claude Prompt Specification</span>
-              <ExternalLink className="w-3 h-3" />
-            </button>
+            <p>© {new Date().getFullYear()} Grange Construction and Steel (Pty) Ltd. All rights reserved.</p>
           </div>
         </div>
       </footer>

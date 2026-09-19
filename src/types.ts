@@ -1,21 +1,3 @@
-export type AppViewMode = 'prompt-studio' | 'live-reference' | 'split-view';
-
-export interface PromptConfig {
-  companyName: string;
-  registrationNumber: string;
-  directorName: string;
-  location: string;
-  markets: string[];
-  specialties: string[];
-  deliveryMethods: string[];
-  themeAesthetic: 'Architectural Charcoal & Industrial Steel' | 'Modern High-End Slate & Bronze' | 'Clean Architectural Monolith';
-  techStack: 'React + Vite + Tailwind CSS' | 'Next.js 14 App Router + Tailwind' | 'Vue 3 + Tailwind';
-  includeEstimator: boolean;
-  includeBlueprintViewer: boolean;
-  includeMaintenanceContracts: boolean;
-  currency: 'ZAR' | 'USD';
-}
-
 export interface ProjectItem {
   id: string;
   title: string;

@@ -1,12 +1,16 @@
 import { ProjectItem, ServicePillar, LeadershipMember, OfficeLocation } from '../types';
+import directorAndileImg from '../assets/images/director_andile_mntambo_1789783854811.jpg';
 
 export const companyOverview = {
   name: 'Grange Construction and Steel (Pty) Ltd',
   tradingName: 'Grange Construction & Steel',
-  director: 'Andile Mntambo',
+  director: 'Andile',
   tagline: 'Precision Building Construction, Custom Structural Steelwork & Turnkey Property Solutions',
   description: 'Grange Construction and Steel (Pty) Ltd is a full-service general building, structural steel fabrication, architectural finishing, and property maintenance contractor based in Riverton, Cape Town, serving residential, commercial, and industrial clients throughout the Western Cape.',
   address: '29 Bayside Street, Riverton, Cape Town, Western Cape, 7490',
+  phone: '+27 74 055 9954',
+  whatsapp: '+27 71 082 6359',
+  email: 'info@grangeconstructions.co.za',
   stats: [
     { label: 'Core Specializations', value: '4 Divisions', detail: 'Building, Steel, Finishes & Maintenance' },
     { label: 'Regional Coverage', value: 'Cape Town', detail: 'Greater Western Cape Metro' },
@@ -241,12 +245,12 @@ export const projectShowcase: ProjectItem[] = [
 
 export const leadershipTeam: LeadershipMember[] = [
   {
-    name: 'Andile Mntambo',
+    name: 'Andile',
     role: 'Managing Director & Founder',
     experience: 'Hands-On Building Contractor & Steel Fabrication Specialist',
     bio: 'Andile founded Grange Construction and Steel (Pty) Ltd to provide Western Cape property owners and developers with an integrated contractor that unites structural civil building with precision in-house metal fabrication. As active Managing Director, he personally oversees on-site quality, structural integrity, and client satisfaction on every project.',
     credentials: 'Director (CIPC Reg: 2026/727301/07); Registered Office: 29 Bayside Street, Riverton, Cape Town',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80'
+    image: directorAndileImg
   },
   {
     name: 'Chief Metal Fabricator & Engineer',
@@ -270,20 +274,20 @@ export const officeLocations: OfficeLocation[] = [
   {
     city: 'Riverton, Cape Town',
     state: 'Western Cape',
-    region: 'Registered Office & Workshop Hub',
+    region: 'Registered Office & Steel Workshop Hub',
     address: '29 Bayside Street, Riverton, Cape Town, Western Cape, 7490',
-    phone: '+27 21 820 4400',
-    email: 'info@grangeconstruction.co.za',
+    phone: '+27 74 055 9954',
+    email: 'info@grangeconstructions.co.za',
     coordinates: '33.9512° S, 18.5721° E',
     isPrimary: true
   },
   {
     city: 'Cape Town Metro & Western Cape',
     state: 'Western Cape',
-    region: 'Mobile Contracting & Site Service Fleet',
+    region: 'Direct Mobile & WhatsApp Quote Line',
     address: 'Serving City Bowl, Atlantic Seaboard, Northern & Southern Suburbs, Winelands',
-    phone: '+27 72 450 8820',
-    email: 'quotes@grangeconstruction.co.za',
+    phone: '+27 71 082 6359',
+    email: 'info@grangeconstructions.co.za',
     coordinates: '33.9249° S, 18.4241° E',
     isPrimary: false
   }
