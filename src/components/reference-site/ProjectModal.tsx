@@ -131,7 +131,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, on
           {/* Action Footer */}
           <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
             <a
-              href={`https://wa.me/27710826359?text=Hello%20Grange%20Construction,%20I%20saw%20your%20project%20${encodeURIComponent(project.title)}%20in%20Cape%20Town%20and%20would%20like%20a%20similar%20quote.`}
+              href={`https://wa.me/27740559954?text=Hello%20Grange%20Construction,%20I%20saw%20your%20project%20${encodeURIComponent(project.title)}%20in%20Cape%20Town%20and%20would%20like%20a%20similar%20quote.`}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs flex items-center justify-center gap-2"

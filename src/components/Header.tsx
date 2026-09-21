@@ -28,7 +28,7 @@ export const Header: React.FC<HeaderProps> = () => {
             </span>
             <span className="hidden md:inline text-slate-600">•</span>
             <span className="hidden md:inline text-slate-300">
-              Director: <strong>Andile</strong>
+              CIPC Reg: <strong>2026/727301/07</strong>
             </span>
           </div>
 
@@ -43,21 +43,21 @@ export const Header: React.FC<HeaderProps> = () => {
             </a>
             <span className="text-slate-600 hidden sm:inline">•</span>
             <a 
-              href="tel:+27740559954" 
+              href="tel:+27710826359" 
               className="flex items-center gap-1.5 text-slate-200 hover:text-white transition-colors"
             >
               <Phone className="w-3.5 h-3.5 text-amber-400" />
-              <span className="font-semibold">+27 74 055 9954</span>
+              <span className="font-semibold">+27 71 082 6359</span>
             </a>
             <span className="text-slate-600 hidden sm:inline">•</span>
             <a
-              href="https://wa.me/27710826359?text=Hello%20Grange%20Construction%20and%20Steel,%20I%20would%20like%20to%20request%20a%20quote"
+              href="https://wa.me/27740559954?text=Hello%20Grange%20Construction%20and%20Steel,%20I%20would%20like%20to%20request%20a%20quote"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-emerald-400 hover:text-emerald-300 font-medium transition-colors"
             >
               <MessageSquare className="w-3.5 h-3.5" />
-              <span>+27 71 082 6359 (WhatsApp)</span>
+              <span>+27 74 055 9954 (WhatsApp)</span>
             </a>
           </div>
         </div>
@@ -95,14 +95,15 @@ export const Header: React.FC<HeaderProps> = () => {
           <a href="#services" className="hover:text-slate-900 transition-colors">
             Services
           </a>
+          <a href="#steel-fabrication-gallery" className="hover:text-amber-600 font-semibold transition-colors flex items-center gap-1 text-slate-800">
+            <span>Steelwork Gallery</span>
+            <span className="px-1.5 py-0.5 rounded text-[10px] bg-amber-100 text-amber-900 font-mono font-bold">4</span>
+          </a>
           <a href="#portfolio" className="hover:text-slate-900 transition-colors">
             Our Work
           </a>
           <a href="#suppliers" className="hover:text-amber-600 font-semibold transition-colors flex items-center gap-1">
             <span>Materials & Suppliers</span>
-          </a>
-          <a href="#about" className="hover:text-slate-900 transition-colors">
-            About & Director
           </a>
           <a href="#contact" className="hover:text-slate-900 transition-colors">
             Contact
@@ -121,7 +122,7 @@ export const Header: React.FC<HeaderProps> = () => {
 
           {/* WhatsApp Button */}
           <a
-            href="https://wa.me/27710826359?text=Hello%20Grange%20Construction%20and%20Steel,%20I%20would%20like%20a%20free%20quote"
+            href="https://wa.me/27740559954?text=Hello%20Grange%20Construction%20and%20Steel,%20I%20would%20like%20a%20free%20quote"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold text-white bg-emerald-600 hover:bg-emerald-700 shadow-xs transition-colors"
@@ -134,7 +135,7 @@ export const Header: React.FC<HeaderProps> = () => {
         {/* Mobile menu toggle button */}
         <div className="flex sm:hidden items-center gap-2">
           <a
-            href="https://wa.me/27710826359"
+            href="https://wa.me/27740559954"
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 rounded-lg bg-emerald-600 text-white"
@@ -164,6 +165,14 @@ export const Header: React.FC<HeaderProps> = () => {
               Services (4 Divisions)
             </a>
             <a 
+              href="#steel-fabrication-gallery" 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="px-3 py-2 rounded-lg hover:bg-slate-100 font-semibold text-amber-700 flex items-center justify-between"
+            >
+              <span>Steelwork Gallery (4 Products)</span>
+              <span className="px-1.5 py-0.5 rounded text-[10px] bg-amber-100 text-amber-900 font-mono font-bold">New</span>
+            </a>
+            <a 
               href="#portfolio" 
               onClick={() => setIsMobileMenuOpen(false)}
               className="px-3 py-2 rounded-lg hover:bg-slate-100"
@@ -176,13 +185,6 @@ export const Header: React.FC<HeaderProps> = () => {
               className="px-3 py-2 rounded-lg hover:bg-slate-100 font-semibold text-amber-700"
             >
               Materials & Hardware Suppliers
-            </a>
-            <a 
-              href="#about" 
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="px-3 py-2 rounded-lg hover:bg-slate-100"
-            >
-              About Andile
             </a>
             <a 
               href="#contact" 
@@ -202,11 +204,11 @@ export const Header: React.FC<HeaderProps> = () => {
               <span>info@grangeconstructions.co.za</span>
             </a>
             <a 
-              href="tel:+27740559954"
+              href="tel:+27710826359"
               className="flex items-center justify-center gap-2 py-2 text-xs font-semibold text-slate-700 bg-slate-50 border border-slate-200 rounded-lg"
             >
               <Phone className="w-3.5 h-3.5 text-amber-600" />
-              <span>Call: +27 74 055 9954</span>
+              <span>Call: +27 71 082 6359</span>
             </a>
             <a
               href="#contact"
@@ -216,13 +218,13 @@ export const Header: React.FC<HeaderProps> = () => {
               Request a Free Quote
             </a>
             <a
-              href="https://wa.me/27710826359?text=Hello%20Grange%20Construction%20and%20Steel,%20I%20would%20like%20a%20free%20quote"
+              href="https://wa.me/27740559954?text=Hello%20Grange%20Construction%20and%20Steel,%20I%20would%20like%20a%20free%20quote"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full flex items-center justify-center gap-2 py-2.5 rounded-lg text-xs font-semibold text-white bg-emerald-600"
             >
               <MessageSquare className="w-4 h-4" />
-              <span>WhatsApp: +27 71 082 6359</span>
+              <span>WhatsApp: +27 74 055 9954</span>
             </a>
           </div>
         </div>

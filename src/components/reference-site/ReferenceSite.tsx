@@ -8,17 +8,20 @@ import {
   CheckCircle2, 
   MessageSquare,
   Mail,
-  Check
+  Check,
+  Loader2,
+  AlertCircle,
+  Send
 } from 'lucide-react';
-import { projectShowcase } from '../../data/constructionData';
+import { projectShowcase, steelFabricationGallery } from '../../data/constructionData';
 import { ProjectItem } from '../../types';
 import grangeLogo from '../../assets/images/grange_logo_1789776582651.jpg';
 import buildingConstructionImg from '../../assets/images/building_construction_service_1789782205737.jpg';
 import steelFabricationImg from '../../assets/images/steel_fabrication_service_1789782218564.jpg';
 import finishingWorkImg from '../../assets/images/finishing_work_service_1789782230813.jpg';
 import propertyMaintenanceImg from '../../assets/images/property_maintenance_service_1789782244116.jpg';
-import directorAndileImg from '../../assets/images/director_andile_mntambo_1789783854811.jpg';
 import { SuppliersSection } from './SuppliersSection';
+import { SteelFabricationGallery } from './SteelFabricationGallery';
 
 interface ReferenceSiteProps {
   onSelectProject: (project: ProjectItem) => void;
@@ -28,7 +31,10 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
   onSelectProject
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [rfpSubmitted, setRfpSubmitted] = useState<boolean>(false);
+  const [divisionSteelIndex, setDivisionSteelIndex] = useState<number>(0);
+  const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [formFeedback, setFormFeedback] = useState<string>('');
+  const [formService, setFormService] = useState<string>('Building Construction');
 
   const categories = ['All', 'Building Construction', 'Steel Fabrication', 'Finishing Work', 'Property Maintenance'];
 
@@ -36,10 +42,37 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
     ? projectShowcase
     : projectShowcase.filter(p => p.category === selectedCategory);
 
-  const handleRfpSubmit = (e: React.FormEvent) => {
+  const handleRfpSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setRfpSubmitted(true);
-    setTimeout(() => setRfpSubmitted(false), 4000);
+    setFormStatus('loading');
+    setFormFeedback('');
+
+    try {
+      const form = e.currentTarget;
+      const formData = new FormData(form);
+      formData.append("access_key", "b6a5d068-50a8-4f8e-a298-2dfc28078f73");
+      formData.append("subject", "New Quotation Request - Grange Construction & Steel");
+      formData.append("from_name", "Grange Construction Website");
+
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setFormStatus('success');
+        setFormFeedback('Thank you! Your quote request has been sent to our estimation team. We will review your project details and contact you via email or phone shortly.');
+        form.reset();
+      } else {
+        setFormStatus('error');
+        setFormFeedback(data.message || 'Submission failed. Please try again or contact us directly on WhatsApp.');
+      }
+    } catch (error) {
+      setFormStatus('error');
+      setFormFeedback('Could not connect to the form service. Please contact us directly via WhatsApp (+27 74 055 9954) or call +27 71 082 6359.');
+    }
   };
 
   return (
@@ -71,7 +104,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
             </h1>
 
             <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-normal">
-              From turnkey house construction, room extensions, and boundary walls to automated security gates, carports, and complete property maintenance. Supervised on-site by Managing Director Andile.
+              From turnkey house construction, room extensions, and boundary walls to automated security gates, carports, and complete property maintenance. Delivered with precision craftsmanship and turnkey site supervision.
             </p>
 
             {/* Call to Actions */}
@@ -85,21 +118,21 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
               </a>
 
               <a
-                href="https://wa.me/27710826359?text=Hello%20Grange%20Construction%20and%20Steel,%20I%20would%20like%20a%20quote"
+                href="https://wa.me/27740559954?text=Hello%20Grange%20Construction%20and%20Steel,%20I%20would%20like%20a%20quote"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-6 py-3.5 rounded-xl text-sm font-semibold bg-emerald-600 hover:bg-emerald-500 text-white transition-all shadow-sm flex items-center gap-2"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>WhatsApp: +27 71 082 6359</span>
+                <span>WhatsApp: +27 74 055 9954</span>
               </a>
 
               <a
-                href="tel:+27740559954"
+                href="tel:+27710826359"
                 className="px-5 py-3.5 rounded-xl text-sm font-semibold bg-slate-800/80 hover:bg-slate-700 text-white border border-slate-700 transition-all flex items-center gap-2"
               >
                 <Phone className="w-4 h-4 text-amber-400" />
-                <span>Call: +27 74 055 9954</span>
+                <span>Call: +27 71 082 6359</span>
               </a>
             </div>
 
@@ -114,8 +147,8 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
                 <span className="text-slate-400">Building, Steel, Finishes, Repairs</span>
               </div>
               <div className="space-y-0.5">
-                <span className="text-amber-400 font-bold block text-sm">Direct Supervision</span>
-                <span className="text-slate-400">Led by Andile</span>
+                <span className="text-amber-400 font-bold block text-sm">Turnkey Oversight</span>
+                <span className="text-slate-400">Strict Quality Control</span>
               </div>
               <div className="space-y-0.5">
                 <span className="text-amber-400 font-bold block text-sm">Western Cape Wide</span>
@@ -198,7 +231,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
 
               <div className="p-6 pt-0 flex items-center justify-between border-t border-slate-100 mt-4 pt-4">
                 <a
-                  href="https://wa.me/27710826359?text=Hello%20Grange%20Construction,%20I%20need%20a%20quote%20for%20Building%20Construction"
+                  href="https://wa.me/27740559954?text=Hello%20Grange%20Construction,%20I%20need%20a%20quote%20for%20Building%20Construction"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs font-semibold text-emerald-700 hover:text-emerald-800 flex items-center gap-1.5"
@@ -208,6 +241,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
                 </a>
                 <a
                   href="#contact"
+                  onClick={() => setFormService('Building Construction')}
                   className="text-xs font-semibold text-slate-700 hover:text-slate-900 flex items-center gap-1"
                 >
                   <span>Request Quote</span>
@@ -217,26 +251,81 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
             </div>
 
             {/* Division 2: Steel Fabrication */}
-            <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between">
+            <div className="bg-white rounded-2xl border-2 border-amber-500/40 overflow-hidden shadow-xs hover:shadow-md transition-shadow flex flex-col justify-between">
               <div>
-                <div className="h-56 w-full overflow-hidden bg-slate-100 relative">
+                {/* Active Photo with Badge & Overlay */}
+                <div className="h-56 w-full overflow-hidden bg-slate-900 relative group">
                   <img 
-                    src={steelFabricationImg} 
-                    alt="Steel Fabrication Structural Steel Erection Cape Town" 
-                    className="w-full h-full object-cover"
+                    src={steelFabricationGallery[divisionSteelIndex].image} 
+                    alt={steelFabricationGallery[divisionSteelIndex].title} 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-103"
                     referrerPolicy="no-referrer"
                   />
-                  <div className="absolute top-4 left-4 bg-slate-900/90 text-amber-400 text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
-                    Division 02
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
+                  
+                  <div className="absolute top-3 left-3 bg-slate-900/90 text-amber-400 text-xs font-semibold px-2.5 py-1 rounded-full uppercase tracking-wider">
+                    Division 02 • Steel
+                  </div>
+
+                  <div className="absolute top-3 right-3 bg-amber-500 text-slate-950 text-[11px] font-bold px-2 py-0.5 rounded-md shadow-xs">
+                    {steelFabricationGallery[divisionSteelIndex].badge}
+                  </div>
+
+                  <div className="absolute bottom-2 left-2 right-2 text-white text-xs flex items-center justify-between px-1">
+                    <span className="font-semibold text-white truncate drop-shadow-sm">
+                      {steelFabricationGallery[divisionSteelIndex].title}
+                    </span>
+                    <span className="text-amber-400 font-mono text-[11px] flex-shrink-0 ml-2">
+                      {divisionSteelIndex + 1}/4
+                    </span>
+                  </div>
+                </div>
+
+                {/* 4 Interactive Picture Thumbnails */}
+                <div className="p-2 bg-slate-100 border-b border-slate-200">
+                  <div className="text-[10px] font-semibold text-slate-600 uppercase tracking-wider mb-1.5 px-0.5 flex items-center justify-between">
+                    <span>Attached Fabrication Pictures:</span>
+                    <span className="text-amber-700 font-normal">Click to switch</span>
+                  </div>
+                  <div className="grid grid-cols-4 gap-1.5">
+                    {steelFabricationGallery.map((item, idx) => (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => setDivisionSteelIndex(idx)}
+                        className={`relative aspect-4/3 rounded-lg overflow-hidden border-2 transition-all ${
+                          divisionSteelIndex === idx
+                            ? 'border-amber-600 ring-2 ring-amber-500/50 scale-102 shadow-xs'
+                            : 'border-slate-300 opacity-70 hover:opacity-100 hover:border-slate-400'
+                        }`}
+                        title={item.title}
+                      >
+                        <img 
+                          src={item.image} 
+                          alt={item.badge} 
+                          className="w-full h-full object-cover" 
+                          referrerPolicy="no-referrer" 
+                        />
+                      </button>
+                    ))}
                   </div>
                 </div>
 
                 <div className="p-6 sm:p-7 space-y-4">
-                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
-                    Steel Fabrication
-                  </h3>
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
+                      Steel Fabrication
+                    </h3>
+                    <a
+                      href="#steel-fabrication-gallery"
+                      className="text-xs font-semibold text-amber-700 hover:text-amber-800 underline underline-offset-2"
+                    >
+                      View All 4 Specs ↓
+                    </a>
+                  </div>
+
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    Custom metal manufacturing in our Riverton workshop. We build robust security gates, carports, burglar bars, and balustrades treated for Cape Town's coastal salt air.
+                    Custom metal manufacturing in our Riverton workshop. We engineer robust security gates, carports, burglar bars, and architectural balustrades treated for Cape Town's coastal salt air.
                   </p>
 
                   <div className="space-y-2 pt-2 border-t border-slate-100">
@@ -246,7 +335,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
                     <ul className="space-y-1.5 text-xs text-slate-700">
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                        <span><strong>Security Gates</strong> – Motorized sliding gates & swing gates</span>
+                        <span><strong>Security Gates</strong> – Motorized vertical-slat sliding gates & swing gates</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
@@ -258,11 +347,11 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
                       </li>
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                        <span><strong>Carports</strong> – Engineered single, double & commercial steel carports</span>
+                        <span><strong>Carports</strong> – Engineered pitched-roof, cantilever & solar-ready steel carports</span>
                       </li>
                       <li className="flex items-center gap-2">
                         <Check className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                        <span><strong>Balustrades & Stairs</strong> – Architectural handrails, staircases & fencing</span>
+                        <span><strong>Balustrades & Screens</strong> – Architectural balcony protection & corner louvers</span>
                       </li>
                     </ul>
                   </div>
@@ -271,7 +360,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
 
               <div className="p-6 pt-0 flex items-center justify-between border-t border-slate-100 mt-4 pt-4">
                 <a
-                  href="https://wa.me/27710826359?text=Hello%20Grange%20Construction,%20I%20need%20a%20quote%20for%20Steel%20Fabrication"
+                  href={`https://wa.me/27740559954?text=Hello%20Grange%20Construction,%20I%20need%20a%20quote%20for%20Steel%20Fabrication:%20${encodeURIComponent(steelFabricationGallery[divisionSteelIndex].title)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs font-semibold text-emerald-700 hover:text-emerald-800 flex items-center gap-1.5"
@@ -281,6 +370,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
                 </a>
                 <a
                   href="#contact"
+                  onClick={() => setFormService('Steel Fabrication')}
                   className="text-xs font-semibold text-slate-700 hover:text-slate-900 flex items-center gap-1"
                 >
                   <span>Request Quote</span>
@@ -344,7 +434,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
 
               <div className="p-6 pt-0 flex items-center justify-between border-t border-slate-100 mt-4 pt-4">
                 <a
-                  href="https://wa.me/27710826359?text=Hello%20Grange%20Construction,%20I%20need%20a%20quote%20for%20Finishing%20Work"
+                  href="https://wa.me/27740559954?text=Hello%20Grange%20Construction,%20I%20need%20a%20quote%20for%20Finishing%20Work"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs font-semibold text-emerald-700 hover:text-emerald-800 flex items-center gap-1.5"
@@ -354,6 +444,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
                 </a>
                 <a
                   href="#contact"
+                  onClick={() => setFormService('Finishing Work')}
                   className="text-xs font-semibold text-slate-700 hover:text-slate-900 flex items-center gap-1"
                 >
                   <span>Request Quote</span>
@@ -417,7 +508,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
 
               <div className="p-6 pt-0 flex items-center justify-between border-t border-slate-100 mt-4 pt-4">
                 <a
-                  href="https://wa.me/27710826359?text=Hello%20Grange%20Construction,%20I%20need%20a%20quote%20for%20Property%20Maintenance"
+                  href="https://wa.me/27740559954?text=Hello%20Grange%20Construction,%20I%20need%20a%20quote%20for%20Property%20Maintenance"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs font-semibold text-emerald-700 hover:text-emerald-800 flex items-center gap-1.5"
@@ -427,6 +518,7 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
                 </a>
                 <a
                   href="#contact"
+                  onClick={() => setFormService('Property Maintenance')}
                   className="text-xs font-semibold text-slate-700 hover:text-slate-900 flex items-center gap-1"
                 >
                   <span>Request Quote</span>
@@ -435,6 +527,9 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
               </div>
             </div>
           </div>
+
+          {/* Dedicated In-House Fabricated Steelwork Workshop Gallery */}
+          <SteelFabricationGallery />
         </div>
       </section>
 
@@ -520,83 +615,6 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
         </div>
       </section>
 
-      {/* About Andile & Grange Construction */}
-      <section id="about" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Image / Leadership card */}
-            <div className="space-y-4">
-              <div className="relative rounded-3xl overflow-hidden shadow-lg border border-slate-200 aspect-4/3 sm:aspect-square md:aspect-4/3 bg-slate-100 group">
-                <img
-                  src={directorAndileImg}
-                  alt="Andile Managing Director and Founder Grange Construction and Steel (Pty) Ltd"
-                  className="w-full h-full object-cover object-top"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute bottom-0 inset-x-0 p-6 bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent text-white">
-                  <div className="font-bold text-lg sm:text-xl">Andile</div>
-                  <div className="text-amber-400 text-xs font-semibold tracking-wide">Managing Director & Founder</div>
-                  <div className="text-xs text-slate-300 mt-1">Grange Construction and Steel (Pty) Ltd</div>
-                </div>
-              </div>
-
-              {/* Direct credentials callout */}
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs">
-                <div>
-                  <strong className="text-slate-900 block font-semibold">Workshop & Operations Hub:</strong>
-                  <span className="text-slate-600">29 Bayside Street, Riverton, Cape Town, 7490</span>
-                </div>
-                <span className="px-2.5 py-1 rounded bg-slate-200 text-slate-800 font-semibold text-[11px]">
-                  Riverton, Cape Town
-                </span>
-              </div>
-            </div>
-
-            {/* Narrative Story */}
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <span className="text-xs uppercase tracking-widest text-amber-700 font-semibold font-mono">
-                  Why Work With Us
-                </span>
-                <h2 className="text-2xl sm:text-4xl font-display font-bold text-slate-900 tracking-tight">
-                  One Contractor for Both Building & Steel.
-                </h2>
-              </div>
-
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                Most Cape Town homeowners and property managers face the headache of juggling different builders, welders, tilers, and painters. When timelines slip or measurements don't line up, everyone blames each other.
-              </p>
-
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                <strong>Grange Construction and Steel (Pty) Ltd</strong> was established by Director Andile to solve this problem. Because we have our own in-house steel fabrication workshop in Riverton alongside our certified masonry and finishes teams, your gates, carports, boundary walls, and house extensions are designed and built in complete harmony.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
-                  <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                    <span>On-Site Supervision</span>
-                  </div>
-                  <p className="text-xs text-slate-600">
-                    Direct hands-on supervision by Andile on every active project.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1">
-                  <div className="flex items-center gap-2 text-slate-900 font-bold text-sm">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                    <span>In-House Workshop</span>
-                  </div>
-                  <p className="text-xs text-slate-600">
-                    No middlemen markups on custom gates, burglar bars, and carports.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Verified Hardware & Material Suppliers Showcase */}
       <SuppliersSection />
 
@@ -641,8 +659,8 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
                   <Phone className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
                   <div>
                     <strong className="text-white block font-semibold">Direct Telephone Call</strong>
-                    <a href="tel:+27740559954" className="text-slate-300 hover:text-white text-xs block">
-                      +27 74 055 9954
+                    <a href="tel:+27710826359" className="text-slate-300 hover:text-white text-xs block">
+                      +27 71 082 6359
                     </a>
                   </div>
                 </div>
@@ -652,12 +670,12 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
                   <div>
                     <strong className="text-white block font-semibold">WhatsApp Instant Quote</strong>
                     <a 
-                      href="https://wa.me/27710826359?text=Hello%20Grange%20Construction%20and%20Steel,%20I%20would%20like%20a%20quote" 
+                      href="https://wa.me/27740559954?text=Hello%20Grange%20Construction%20and%20Steel,%20I%20would%20like%20a%20quote" 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="text-emerald-400 hover:underline text-xs"
                     >
-                      +27 71 082 6359 (Send site photos & plan drawings)
+                      +27 74 055 9954 (Send site photos & plan drawings)
                     </a>
                   </div>
                 </div>
@@ -674,63 +692,150 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
 
             {/* Quick Contact Form */}
             <form onSubmit={handleRfpSubmit} className="bg-white text-slate-800 rounded-3xl p-6 sm:p-8 space-y-4 shadow-xl">
-              <h3 className="text-xl font-bold text-slate-900">
-                Send Project Inquiry
-              </h3>
+              <div className="flex items-center justify-between">
+                <h3 className="text-xl font-bold text-slate-900">
+                  Send Project Inquiry
+                </h3>
+                <span className="text-[11px] font-medium text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Quotes Sent to Email
+                </span>
+              </div>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-slate-700">Your Full Name</label>
+                  <label className="text-xs font-semibold text-slate-700">Your Full Name *</label>
                   <input
                     type="text"
+                    name="name"
                     required
                     placeholder="e.g. Michael van der Merwe"
                     className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-amber-600 focus:bg-white transition-colors"
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-slate-700">Phone / WhatsApp Number</label>
+                  <label className="text-xs font-semibold text-slate-700">Phone / WhatsApp Number *</label>
                   <input
                     type="tel"
+                    name="phone"
                     required
-                    placeholder="e.g. 074 055 9954"
+                    placeholder="e.g. 071 082 6359"
                     className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-amber-600 focus:bg-white transition-colors"
                   />
                 </div>
               </div>
 
               <div className="space-y-1">
+                <label className="text-xs font-semibold text-slate-700">Your Email Address *</label>
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="e.g. client@example.co.za"
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-amber-600 focus:bg-white transition-colors"
+                />
+              </div>
+
+              <div className="space-y-1">
                 <label className="text-xs font-semibold text-slate-700">Service Category</label>
-                <select className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-amber-600 focus:bg-white transition-colors">
-                  <option>Building Construction (New Houses, Extensions, Walls)</option>
-                  <option>Steel Fabrication (Gates, Bars, Carports, Balustrades)</option>
-                  <option>Finishing Work (Tiling, Painting, Waterproofing)</option>
-                  <option>Property Maintenance & Landlord Retainers</option>
+                <select 
+                  name="service"
+                  value={formService}
+                  onChange={(e) => setFormService(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-amber-600 focus:bg-white transition-colors"
+                >
+                  <option value="Building Construction">Building Construction (New Houses, Extensions, Boundary Walls)</option>
+                  <option value="Steel Fabrication">Steel Fabrication (Security Gates, Carports, Balustrades)</option>
+                  <option value="Finishing Work">Finishing Work (Tiling, Skimming, Painting, Waterproofing)</option>
+                  <option value="Property Maintenance">Property Maintenance & Landlord Retainers</option>
+                  <option value="Other / Comprehensive Multi-Division Project">Other / Comprehensive Multi-Division Project</option>
                 </select>
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-700">Property Suburb & Requirements</label>
+                <label className="text-xs font-semibold text-slate-700">Property Suburb & Requirements *</label>
                 <textarea
                   rows={3}
+                  name="message"
                   required
-                  placeholder="Detail your requirements, property location in Cape Town, and ideal timeline..."
+                  placeholder="Detail your requirements, property location in Cape Town, approximate dimensions, and ideal timeline..."
                   className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-amber-600 focus:bg-white transition-colors"
                 ></textarea>
               </div>
 
-              {rfpSubmitted ? (
-                <div className="p-3.5 rounded-xl bg-emerald-50 text-emerald-800 text-xs text-center font-medium border border-emerald-200">
-                  ✓ Inquiry sent successfully! Managing Director Andile will contact you shortly.
+              {/* Botcheck honeypot for Web3Forms spam prevention */}
+              <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
+
+              {formStatus === 'success' && (
+                <div className="p-4 rounded-xl bg-emerald-50 text-emerald-900 text-xs border border-emerald-200 space-y-2">
+                  <div className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-bold">Inquiry Sent to Email Successfully!</p>
+                      <p className="text-emerald-800 mt-0.5">{formFeedback}</p>
+                    </div>
+                  </div>
+                  <div className="pt-2 border-t border-emerald-200 flex items-center justify-between gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setFormStatus('idle')}
+                      className="text-[11px] font-semibold text-emerald-800 hover:text-emerald-950 underline"
+                    >
+                      Send another inquiry
+                    </button>
+                    <a
+                      href="https://wa.me/27740559954?text=Hello%20Grange%20Construction,%20I%20just%20submitted%20a%20quote%20request%20via%20your%20website%20form"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[11px] font-semibold text-emerald-700 hover:underline flex items-center gap-1"
+                    >
+                      <MessageSquare className="w-3.5 h-3.5" />
+                      <span>Follow up on WhatsApp</span>
+                    </a>
+                  </div>
                 </div>
-              ) : (
-                <button
-                  type="submit"
-                  className="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider transition-all shadow-sm"
-                >
-                  Submit for Free Inspection & Quote
-                </button>
               )}
+
+              {formStatus === 'error' && (
+                <div className="p-4 rounded-xl bg-rose-50 text-rose-900 text-xs border border-rose-200 space-y-2">
+                  <div className="flex items-start gap-2">
+                    <AlertCircle className="w-4 h-4 text-rose-600 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-bold">Submission Issue</p>
+                      <p className="text-rose-800 mt-0.5">{formFeedback}</p>
+                    </div>
+                  </div>
+                  <div className="pt-1">
+                    <a
+                      href="https://wa.me/27740559954"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 font-semibold text-emerald-800 hover:underline"
+                    >
+                      <MessageSquare className="w-3.5 h-3.5" />
+                      <span>Send inquiry via WhatsApp instead (+27 74 055 9954)</span>
+                    </a>
+                  </div>
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={formStatus === 'loading'}
+                className="w-full py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 disabled:bg-amber-300 text-slate-950 font-bold text-xs uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-2"
+              >
+                {formStatus === 'loading' ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Sending Quote Request to Email...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-3.5 h-3.5" />
+                    <span>Submit for Free Inspection & Quote</span>
+                  </>
+                )}
+              </button>
             </form>
           </div>
         </div>
@@ -765,11 +870,22 @@ export const ReferenceSite: React.FC<ReferenceSiteProps> = ({
                 <span>info@grangeconstructions.co.za</span>
               </a>
               <span>•</span>
+              <a href="tel:+27710826359" className="text-slate-300 hover:text-white transition-colors">
+                Call: +27 71 082 6359
+              </a>
+              <span>•</span>
+              <a 
+                href="https://wa.me/27740559954" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-emerald-400 hover:text-emerald-300 transition-colors"
+              >
+                WhatsApp: +27 74 055 9954
+              </a>
+              <span>•</span>
               <span>29 Bayside St, Riverton, Cape Town</span>
               <span>•</span>
-              <span>Director: Andile</span>
-              <span>•</span>
-              <span>Western Cape</span>
+              <span>CIPC Reg: 2026/727301/07</span>
             </div>
           </div>
 

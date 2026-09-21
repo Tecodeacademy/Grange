@@ -1,15 +1,75 @@
 import { ProjectItem, ServicePillar, LeadershipMember, OfficeLocation } from '../types';
 import directorAndileImg from '../assets/images/director_andile_mntambo_1789783854811.jpg';
+import steelSlidingGateImg from '../assets/images/steel_sliding_gate_1789972008465.jpg';
+import pitchedMetalCarportImg from '../assets/images/pitched_metal_carport_1789972022375.jpg';
+import balconyMetalScreenImg from '../assets/images/balcony_metal_screen_1789972035335.jpg';
+import cantileverSolarCarportImg from '../assets/images/cantilever_solar_carport_1789972048111.jpg';
+
+export {
+  steelSlidingGateImg,
+  pitchedMetalCarportImg,
+  balconyMetalScreenImg,
+  cantileverSolarCarportImg
+};
+
+export interface SteelFabricationShowcaseItem {
+  id: string;
+  title: string;
+  category: string;
+  image: string;
+  badge: string;
+  description: string;
+  specs: string[];
+}
+
+export const steelFabricationGallery: SteelFabricationShowcaseItem[] = [
+  {
+    id: 'motorized-slat-gate',
+    title: 'Motorized Vertical-Slat Security Gate & Wall Fencing',
+    category: 'Automated Security Gates',
+    image: steelSlidingGateImg,
+    badge: 'Custom Gates & Walls',
+    description: 'Precision black vertical-slat motorized sliding security gate with matching architectural boundary wall fence panels anchored into plastered masonry pillars.',
+    specs: ['Heavy-gauge steel slats & anti-lift track', 'Matching perimeter wall fence inserts', 'Centurion automated gate motor integration', 'Coastal anti-rust powder coating']
+  },
+  {
+    id: 'pitched-metal-carport',
+    title: 'Engineered Pitched Gable Steel Carport',
+    category: 'Structural Steel Carports',
+    image: pitchedMetalCarportImg,
+    badge: 'Gable Roof Structure',
+    description: 'Heavy-duty freestanding structural steel carport featuring engineered welded triangular roof trusses, robust SHS uprights, and corrugated chromadek roofing.',
+    specs: ['Engineered welded triangular trusses', 'Corrugated chromadek all-weather sheeting', 'Heavy-duty anchored foundation baseplates', 'Cape Town high wind-load certified']
+  },
+  {
+    id: 'balcony-metal-screen',
+    title: 'Architectural Corner Metal Balcony Screen',
+    category: 'Balustrades & Screens',
+    image: balconyMetalScreenImg,
+    badge: 'Architectural Metalwork',
+    description: 'Contemporary corner-wrapping architectural metal protection screen and horizontal louvered steel balustrade providing privacy and high-security structural integrity.',
+    specs: ['Seamless corner mitred steel frame', 'Aerodynamic horizontal louver profile', 'Concealed tamper-proof facade fixings', 'Matte exterior architectural finish']
+  },
+  {
+    id: 'cantilever-solar-carport',
+    title: 'Cantilever Solar-Ready Steel Carport',
+    category: 'Solar Carports',
+    image: cantileverSolarCarportImg,
+    badge: 'Solar-Ready Cantilever',
+    description: 'Modern angled cantilever structural steel carport engineered for effortless vehicle clearance with integrated structural mounts for rooftop photovoltaic (PV) solar panels.',
+    specs: ['Angled cantilever space-efficient design', 'Photovoltaic (PV) solar panel support rails', 'High-tensile welded steel box sections', 'Precision paved driveway integration']
+  }
+];
 
 export const companyOverview = {
   name: 'Grange Construction and Steel (Pty) Ltd',
   tradingName: 'Grange Construction & Steel',
-  director: 'Andile',
+  director: 'Management Team',
   tagline: 'Precision Building Construction, Custom Structural Steelwork & Turnkey Property Solutions',
   description: 'Grange Construction and Steel (Pty) Ltd is a full-service general building, structural steel fabrication, architectural finishing, and property maintenance contractor based in Riverton, Cape Town, serving residential, commercial, and industrial clients throughout the Western Cape.',
   address: '29 Bayside Street, Riverton, Cape Town, Western Cape, 7490',
-  phone: '+27 74 055 9954',
-  whatsapp: '+27 71 082 6359',
+  phone: '+27 71 082 6359',
+  whatsapp: '+27 74 055 9954',
   email: 'info@grangeconstructions.co.za',
   stats: [
     { label: 'Core Specializations', value: '4 Divisions', detail: 'Building, Steel, Finishes & Maintenance' },
@@ -165,28 +225,60 @@ export const projectShowcase: ProjectItem[] = [
   },
   {
     id: 'camps-bay-architectural-steel',
-    title: 'Custom Motorized Gate, Balustrades & Cantilever Carport',
-    client: 'Coastal Luxury Villa Developer',
+    title: 'Custom Motorized Slat Security Gate & Balcony Screen',
+    client: 'Residential Property Owner',
     category: 'Steel Fabrication',
     location: 'Camps Bay, Western Cape',
-    area: '45 Linear Meters Steelwork',
+    area: '45 Linear Meters Custom Steelwork',
     year: '2026',
-    deliveryMethod: 'Bespoke Fabrication & Install',
-    description: 'Architectural marine-grade hot-dip galvanized and matte black powder-coated steelwork package including automated horizontal slat driveway gate, bespoke steel floating stairs, and stainless steel glass balustrades.',
+    deliveryMethod: 'Bespoke Fabrication & Turnkey Install',
+    description: 'Architectural marine-grade hot-dip galvanized and matte black powder-coated steelwork package including automated vertical-slat driveway sliding gate, integrated boundary masonry fence grilles, and contemporary corner-louvered balcony balustrades.',
     highlights: [
-      'Double-pass marine-grade powder coating to prevent coastal salt-air rust corrosion',
-      'Centurion D10 Smart high-speed gate motor installation with battery backup',
-      'Sleek frameless glass & tubular stainless steel pool and balcony balustrades'
+      'Vertical-slat automated sliding gate with matching boundary wall inserts',
+      'Marine-grade coastal powder coating preventing rust and salt-air deterioration',
+      'Centurion automated gate motor integration with remote access and battery backup',
+      'Architectural corner metal balcony screen and safety louver enclosure'
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1600&q=80',
+    imageUrl: steelSlidingGateImg,
     galleryImages: [
-      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80'
+      balconyMetalScreenImg,
+      pitchedMetalCarportImg,
+      cantileverSolarCarportImg
     ],
     specs: {
-      sqft: '45m Balustrades + 6m Gate + Double Carport',
-      timeline: '3 Weeks Fabrication & 4 Days Install',
+      sqft: '6m Motorized Slat Gate + 35m Boundary & Balcony Steelwork',
+      timeline: '3 Weeks Fabrication & 3 Days Install',
       engineerOrFabricator: 'Grange Steel Fabrication Workshop',
-      scope: 'Laser-cut security gate, custom burglar bars, steel staircase, cantilever carport'
+      scope: 'Motorized security gate, boundary wall slats, corner balcony protection louvers'
+    }
+  },
+  {
+    id: 'constantia-pitched-cantilever-carports',
+    title: 'Engineered Pitched-Roof & Cantilever Solar Steel Carports',
+    client: 'Private Estate & Commercial Yard',
+    category: 'Steel Fabrication',
+    location: 'Constantia & Riverton, Cape Town',
+    area: 'Multi-Bay Engineered Carport Solutions',
+    year: '2026',
+    deliveryMethod: 'Custom Design, Welding & Erection',
+    description: 'Turnkey structural steel carport projects including heavy-duty gable roof carports with welded triangular trusses and chromadek corrugated roofing, alongside modern angled cantilever carports engineered for rooftop solar photovoltaic arrays.',
+    highlights: [
+      'Heavy-duty gable steel trusses designed for Cape Town winter gale-force wind loads',
+      'Corrosion-resistant marine undercoat with matte black industrial finish',
+      'Cantilever solar-ready carport profile providing unobstructed vehicle parking clearance',
+      'Engineered concrete footings with heavy-gauge anchoring baseplate assemblies'
+    ],
+    imageUrl: pitchedMetalCarportImg,
+    galleryImages: [
+      cantileverSolarCarportImg,
+      steelSlidingGateImg,
+      balconyMetalScreenImg
+    ],
+    specs: {
+      sqft: 'Double & Triple Bay Carport Footprint',
+      timeline: '2 Weeks Fabrication & 2 Days On-Site Erection',
+      engineerOrFabricator: 'Grange Steel Fabrication Hub',
+      scope: 'Pitched gable steel carport, welded trusses, cantilever solar frame, chromadek roof'
     }
   },
   {
@@ -276,7 +368,7 @@ export const officeLocations: OfficeLocation[] = [
     state: 'Western Cape',
     region: 'Registered Office & Steel Workshop Hub',
     address: '29 Bayside Street, Riverton, Cape Town, Western Cape, 7490',
-    phone: '+27 74 055 9954',
+    phone: '+27 71 082 6359',
     email: 'info@grangeconstructions.co.za',
     coordinates: '33.9512° S, 18.5721° E',
     isPrimary: true
@@ -286,7 +378,7 @@ export const officeLocations: OfficeLocation[] = [
     state: 'Western Cape',
     region: 'Direct Mobile & WhatsApp Quote Line',
     address: 'Serving City Bowl, Atlantic Seaboard, Northern & Southern Suburbs, Winelands',
-    phone: '+27 71 082 6359',
+    phone: '+27 74 055 9954',
     email: 'info@grangeconstructions.co.za',
     coordinates: '33.9249° S, 18.4241° E',
     isPrimary: false
